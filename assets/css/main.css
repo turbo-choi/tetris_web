@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 커스텀 스타일 */
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-gray-900 text-white;
+  }
+}
+
+@layer components {
+  /* 게임 보드 애니메이션 */
+  .tetris-cell {
+    @apply transition-all duration-150 ease-in-out;
+  }
+  
+  .tetris-cell:hover {
+    @apply scale-105;
+  }
+  
+  /* 버튼 스타일 */
+  .game-button {
+    @apply px-6 py-3 rounded-xl font-semibold text-white transition-all duration-200 transform hover:scale-105 active:scale-95;
+  }
+  
+  /* 글로우 효과 */
+  .glow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+  
+  /* 펄스 애니메이션 */
+  .pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }
+}
+
+@layer utilities {
+  /* 커스텀 그라데이션 */
+  .bg-game-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .bg-board-gradient {
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  }
+}
+
+/* 키프레임 애니메이션 */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+  }
+}
+
+/* 반응형 폰트 크기 */
+@media (max-width: 640px) {
+  .tetris-title {
+    @apply text-2xl;
+  }
+  
+  .tetris-cell {
+    @apply w-6 h-6;
+  }
+}
+
+/* 접근성 개선 */
+@media (prefers-reduced-motion: reduce) {
+  .tetris-cell,
+  .game-button {
+    @apply transition-none;
+  }
+  
+  .pulse-glow {
+    animation: none;
+  }
+}
+
+/* 포커스 스타일 */
+.game-button:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-gray-900;
+}
+
+/* 게임 오버 모달 애니메이션 */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+/* 라인 클리어 애니메이션 */
+@keyframes line-clear {
+  0% {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scaleX(1);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 1);
+    transform: scaleX(1.05);
+  }
+  100% {
+    background-color: transparent;
+    transform: scaleX(0);
+  }
+}
+
+.line-clear {
+  animation: line-clear 0.5s ease-in-out;
+}
